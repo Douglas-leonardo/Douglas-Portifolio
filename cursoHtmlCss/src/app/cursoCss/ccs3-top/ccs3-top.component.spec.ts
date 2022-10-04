@@ -14,12 +14,5 @@ describe('Ccs3TopComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Ccs3TopComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

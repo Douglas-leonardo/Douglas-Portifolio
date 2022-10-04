@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recursos do HTML 5</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <li><a href="#"> Home</a></li>
+        <li><a href="#"> Produtos</a></li>
+        <li><a href="#"> Contato</a></li>
+      </nav>
+    </header>
+    <article>
+      <h1>Resursos do HTML 5</h1>
+
+      <div>
+        <video width="320" height="240" controls>
+          <source src="../assets/videos/cidade.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div>
+        <audio controls>
+          <source src="../assets/audio/music.mp3" type="audio/mpeg " />
+        </audio>
+      </div>
+      <div>
+        <figure controls>
+          <img src="../assets/imagem/ricefield.jpg" alt="Campo de arroz" />
+          <figcaption>um lindo campo de arroz</figcaption>
+        </figure>
+      </div>
+      <div>
+        <p contenteditable="true">Este é um paragrafo que pode ser editado.</p>
+      </div>
+      <div>
+        <form>
+          <h3>Preencha seu nome</h3>
+          <input
+            type="text"
+            name="name"
+            placeholder="Digite seu nome"
+            required
+          />
+          <h3>Preencha seu email</h3>
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            required
+            autofocus
+          />
+          <input type="submit" name="Enviar" />
+        </form>
+      </div>
+    </article>
+    <aside>
+      <p>Confira os nossos produtos, <a href="#">Clicando aqui!</a></p>
+    </aside>
+    <details open="open">
+      <summary>Gato</summary>
+      <p>É pra quem gosta</p>
+    </details>
+    <details open="open">
+      <summary>Cachorro</summary>
+      <p>É um animal muito gente boa</p>
+    </details>
+    <form>
+      <p>Animais</p>
+      <input list="animais" name="animal" />
+      <datalist id="animais">
+        <option value="Cachorro"></option>
+        <option value="Gato"></option>
+        <option value="Humano"></option>
+        <option value="Lula"></option>
+      </datalist>
+    </form>
+    <P>Barra de loading:</P>
+    <progress value="63" max="100"></progress>
+    <footer><p>Rodapé</p></footer>
+  </body>
+</html>
+<h1>Projeto 2</h1>

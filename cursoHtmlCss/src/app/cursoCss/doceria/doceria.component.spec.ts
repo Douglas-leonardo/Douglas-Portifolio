@@ -14,12 +14,5 @@ describe('DoceriaComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DoceriaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

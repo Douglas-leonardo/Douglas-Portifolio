@@ -3,18 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DoceriaComponent } from './doceria/doceria.component';
-import { Ccs3TopComponent } from './ccs3-top/ccs3-top.component';
+import { FormsModule } from '@angular/forms';
+import { CursoModule } from './cursoCss/curso.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DoceriaComponent,
-    Ccs3TopComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    AppRoutingModule,
+    CursoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
