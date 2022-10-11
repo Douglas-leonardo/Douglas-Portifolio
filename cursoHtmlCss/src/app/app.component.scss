@@ -1,8 +1,28 @@
 .textPrimary{
   margin-right: auto;
   margin-left: auto;
-  height: 32px;
+  height: 38px;
   padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 37px;
+}
+
+#bemVindo{
+  position: relative;
+  top: -8px;
+  background-color: #232A31;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+a{
+  text-decoration: none;
+  transition: 0.5s;
+  color: #FFF;
+  text-transform: uppercase;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+  color: #1d9e39;
 }

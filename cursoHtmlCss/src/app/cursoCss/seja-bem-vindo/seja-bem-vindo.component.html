@@ -1,23 +1,58 @@
-<h1>Vem me consulta rsrs!</h1>
-<div class="navbar-header">
-  <a [routerLink]="['/cursoCss/ccs3-top']" class="btn btn-xs btn-success">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CSS3
-  </a>
-</div>
-<div class="navbar-header">
-  <a [routerLink]="['/cursoCss/recursos-html']" class="btn btn-xs btn-success">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Recursos HTML
-  </a>
-</div>
+<div class="container">
+  <section class="pricing-container">
+    <h1>Exemplos de telas</h1>
+    <p>Selecione uma que você gostaria de olhar</p>
+    <div class="plans-container">
+      <div class="plan">
+        <ul>
+          <li class="plan-name">CSS3</li>
+          <li>Exemplos de criações com CSS 3.</li>
+          <li>Animações.</li>
+          <li>Bordas.</li>
+          <li [routerLink]="['/cursoCss/ccs3-top']" class="plan-btn">Selecionar</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <ul>
+          <li class="plan-name">RECURSOS HTML</li>
+          <li>Exemplos de criações com HTML 5.</li>
+          <li>Tags de implementação</li>
+          <li>Atributos.</li>
+          <li [routerLink]="['/cursoCss/recursos-html']" class="plan-btn teste">Selecionar</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <ul>
+          <li class="plan-name">DOCERIA</li>
+          <li>Exemplos de HTML 5 e CSS.</li>
+          <li>Conteudos na tela.</li>
+          <li>Bordas, rodapes e implementação.</li>
+          <li [routerLink]="['/cursoCss/doceria']" class="plan-btn teste">Selecionar</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <ul>
+          <li class="plan-name">FLEX BOX</li>
+          <li>Exemplos de criações com Flex Box</li>
+          <li>Propriedades Flex Box.</li>
+          <li>Propriedades Aling.</li>
+          <li [routerLink]="['/cursoCss/flex-box']" class="plan-btn">Selecionar</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <ul>
+          <li class="plan-name">FLEX BOX 2</li>
+          <li>Exemplos de criações com Flex Box 2</li>
+          <li>CSS com sessões flexBox</li>
+          <li>Banner de navegação principal</li>
+          <li [routerLink]="['/cursoCss/flex-box2']" class="plan-btn">Selecionar</li>
+        </ul>
+      </div>
+    </div>
+    <footer>
+      <p>Projetinhos 2022.</p>
+    </footer>
 
-<div class="navbar-header">
-  <a [routerLink]="['/cursoCss/app-doceria']" class="btn btn-xs btn-success">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Doceria
-  </a>
-</div>
+  </section>
 
-<div class="navbar-header">
-  <a [routerLink]="['/cursoCss/ccs3-top']" class="btn btn-xs btn-success">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CSS3
-  </a>
 </div>
