@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { RecursosHtmlComponent } from './recursos-html';
 import { FlexBoxComponent } from './flex-box/flex-box.component';
 import { FlexBox2Component } from './flex-box2/flex-box2.component';
+import { WhatsappWebComponent } from './whatsapp-web/whatsapp-web.component';
+import { PaginaDeBuscaComponent } from './pagina-de-busca/pagina-de-busca.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FlexBox2Component } from './flex-box2/flex-box2.component';
     Ccs3TopComponent,
     SejaBemVindoComponent,
     FlexBoxComponent,
-    FlexBox2Component
+    FlexBox2Component,
+    WhatsappWebComponent,
+    PaginaDeBuscaComponent
   ],
   imports: [
     CommonModule, RouterModule, FormsModule
