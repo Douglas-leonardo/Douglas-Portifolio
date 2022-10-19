@@ -10,6 +10,7 @@ import { FlexBoxComponent } from './flex-box/flex-box.component';
 import { FlexBox2Component } from './flex-box2/flex-box2.component';
 import { WhatsappWebComponent } from './whatsapp-web/whatsapp-web.component';
 import { PaginaDeBuscaComponent } from './pagina-de-busca/pagina-de-busca.component';
+import { InstagramWebComponent } from './instagram-web/instagram-web.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PaginaDeBuscaComponent } from './pagina-de-busca/pagina-de-busca.compon
     FlexBoxComponent,
     FlexBox2Component,
     WhatsappWebComponent,
-    PaginaDeBuscaComponent
+    PaginaDeBuscaComponent,
+    InstagramWebComponent
   ],
   imports: [
     CommonModule, RouterModule, FormsModule

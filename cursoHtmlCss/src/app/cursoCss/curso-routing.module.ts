@@ -1,5 +1,6 @@
+import { InstagramWebComponent } from './instagram-web';
 import { WhatsappWebComponent } from './whatsapp-web';
-import { FlexBoxComponent } from './flex-box/flex-box.component';
+import { FlexBoxComponent } from './flex-box';
 import { SejaBemVindoComponent } from './seja-bem-vindo';
 import { RecursosHtmlComponent } from './recursos-html';
 import { DoceriaComponent } from './doceria';
@@ -18,4 +19,5 @@ export const CursoRoutes: Routes = [
   { path: 'cursoCss/flex-box2', component: FlexBox2Component },
   { path: 'cursoCss/whatsapp-web', component: WhatsappWebComponent },
   { path: 'cursoCss/pagina-de-busca', component: PaginaDeBuscaComponent },
+  { path: 'cursoCss/instagram-web', component: InstagramWebComponent },
 ];
