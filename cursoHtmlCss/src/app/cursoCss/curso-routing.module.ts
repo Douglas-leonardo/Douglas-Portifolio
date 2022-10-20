@@ -8,6 +8,7 @@ import { Ccs3TopComponent } from './ccs3-top';
 import { Routes } from '@angular/router';
 import { FlexBox2Component } from './flex-box2';
 import { PaginaDeBuscaComponent } from './pagina-de-busca';
+import { LandingPageComponent } from './landing-page';
 
 export const CursoRoutes: Routes = [
   { path: 'cursoCss', redirectTo: 'cursoCss/bem-vindo' },
@@ -20,4 +21,5 @@ export const CursoRoutes: Routes = [
   { path: 'cursoCss/whatsapp-web', component: WhatsappWebComponent },
   { path: 'cursoCss/pagina-de-busca', component: PaginaDeBuscaComponent },
   { path: 'cursoCss/instagram-web', component: InstagramWebComponent },
+  { path: 'cursoCss/landing-page', component: LandingPageComponent },
 ];
