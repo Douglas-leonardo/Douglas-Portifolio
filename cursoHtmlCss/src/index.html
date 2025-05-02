@@ -1,13 +1,1738 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Gerenciador de Cursos</title>
-    <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  </head>
-  <body>
-    <app-root></app-root>
-  </body>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InDecor - Evento Premium de Design de Interiores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #00baf2;
+            --primary-dark: #0095c7;
+            --primary-light: #e6f7fd;
+            --secondary: #f8f9fa;
+            --accent: #ff6b6b;
+            --accent-dark: #e05555;
+            --dark: #212529;
+            --dark-light: #343a40;
+            --light: #f8f9fa;
+            --text-color: #ffffff;
+            --text-secondary: #495057;
+            --text-tertiary: #6c757d;
+            --transition: all 0.3s ease;
+            --transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+            --border-radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 5%;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .header-text {
+            max-width: 600px;
+        }
+
+        .header-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .header-text .highlight {
+            color: var(--primary);
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .event-date i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .event-date span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .nav-container.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Subscription Form */
+        .subscription-form {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .subscription-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .subscription-form h3 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 186, 242, 0.2);
+        }
+
+        /* Benefits Section */
+        #benefits {
+            padding: 5rem 0;
+            background-color: var(--secondary);
+        }
+
+        .benefits-container {
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .benefit-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+        }
+
+        .benefit-content {
+            padding: 1.5rem;
+        }
+
+        .benefit-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .benefit-content p {
+            color: var(--text-tertiary);
+        }
+
+        /* Location Section */
+        #location {
+            padding: 5rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .location-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .location-info {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .location-info h2 {
+            color: white;
+        }
+
+        .location-info h2::after {
+            background-color: var(--accent);
+        }
+
+        .location-info p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .address {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .address-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-right: 1.5rem;
+        }
+
+        .address-text p {
+            margin: 0.3rem 0;
+        }
+
+        /* Details Section */
+        #details {
+            padding: 5rem 0;
+        }
+
+        .detail-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4rem;
+            gap: 3rem;
+        }
+
+        .detail-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .detail-img {
+            flex: 1;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .detail-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition-slow);
+        }
+
+        .detail-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-content h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .detail-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-content ul {
+            list-style-type: none;
+        }
+
+        .detail-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .detail-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Speakers Section */
+        #speakers {
+            padding: 5rem 0;
+            background-color: var(--primary-light);
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .speaker-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .speaker-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .speaker-info {
+            padding: 1.5rem;
+        }
+
+        .speaker-info h3 {
+            margin-bottom: 0.3rem;
+        }
+
+        .speaker-info p.specialty {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .speaker-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .speaker-social a {
+            color: var(--text-tertiary);
+            transition: var(--transition);
+        }
+
+        .speaker-social a:hover {
+            color: var(--primary);
+        }
+
+        /* Schedule Section */
+        #schedule {
+            padding: 5rem 0;
+        }
+
+        .schedule-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .schedule-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .schedule-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .schedule-tab.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .schedule-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .schedule-content {
+            display: none;
+        }
+
+        .schedule-content.active {
+            display: block;
+        }
+
+        .schedule-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .schedule-time {
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .schedule-details h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-details p {
+            color: var(--text-tertiary);
+        }
+
+        /* CTA Section */
+        #cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(0, 186, 242, 0.9), rgba(0, 150, 199, 0.9)),
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+        }
+
+        #cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        #cta h2::after {
+            background-color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Pricing Section */
+        #pricing {
+            padding: 5rem 0;
+            background-color: var(--secondary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: translateY(-50%) rotate(15deg);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-tertiary);
+        }
+
+        .pricing-features {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            padding: 5rem 0;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin: 0 1rem;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial-text::before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-right: 1rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.3rem;
+        }
+
+        .author-info p {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        #faq {
+            padding: 5rem 0;
+            background-color: var(--secondary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            background-color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: var(--primary-light);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .faq-question.active::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: white;
+        }
+
+        .faq-answer.active {
+            padding: 1.2rem;
+            max-height: 500px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-logo span {
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer-links h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-contact h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .header-text {
+                margin-bottom: 3rem;
+            }
+
+            .header-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .event-date {
+                justify-content: center;
+            }
+
+            .location-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .location-info {
+                margin-bottom: 3rem;
+            }
+
+            .address {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .detail-card {
+                flex-direction: column;
+            }
+
+            .detail-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .detail-img, .detail-content {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .header-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-links ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .footer-contact p {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .subscription-form {
+                padding: 1.5rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-title::after {
+                height: 3px;
+                width: 40px;
+                bottom: -8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <a href="#" class="logo">In<span>Decor</span></a>
+        <button class="mobile-menu-btn">
+            <i class="bi bi-list"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#benefits">Benefícios</a></li>
+            <li><a href="#speakers">Palestrantes</a></li>
+            <li><a href="#schedule">Programação</a></li>
+            <li><a href="#pricing">Investimento</a></li>
+            <li><a href="#cta" class="btn btn-outline">Inscreva-se</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="header-text">
+                <h1>Transforme seu espaço com <span class="highlight">InDecor</span></h1>
+                <p>Um evento exclusivo para revolucionar sua criatividade e transformar ambientes</p>
+
+                <div class="event-date">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Domingo, 28 de Maio, a partir das 14h</span>
+                </div>
+            </div>
+
+            <div class="subscription-form animate">
+                <h3>Inscreva-se agora</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="Seu melhor e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" placeholder="Seu WhatsApp">
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Principal interesse</label>
+                        <select id="interest" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="apartment">Apartamentos</option>
+                            <option value="house">Casas</option>
+                            <option value="office">Escritórios</option>
+                            <option value="garden">Jardins</option>
+                            <option value="other">Outros</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Quero me inscrever</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Benefits Section -->
+    <section id="benefits">
+        <div class="container benefits-container">
+            <h2 class="section-title animate">O que você vai aprender</h2>
+            <p class="animate" style="max-width: 700px; margin: 0 auto 1rem;">Descubra as técnicas revolucionárias que os melhores designers de interiores usam para criar ambientes incríveis</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card animate">
+                    <div class="benefit-img" style="background-image: url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');"></div>
+                    <div class="benefit-content">
+                        <h3>Design de Interiores</h3>
+                        <p>Aprenda técnicas profissionais para transformar qualquer ambiente em um espaço funcional e esteticamente impressionante.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card animate">
+                    <div class="benefit-img" style="background-image: url('https://images.unsplash.com/photo-1617806118233-18e1de247200?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');"></div>
+                    <div class="benefit-content">
+                        <h3>Combinação de Cores</h3>
+                        <p>Domine a psicologia das cores e crie paletas harmoniosas que transmitam a atmosfera desejada em cada ambiente.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-card animate">
+                    <div class="benefit-img" style="background-image: url('https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80');"></div>
+                    <div class="benefit-content">
+                        <h3>Organização Espacial</h3>
+                        <p>Maximize espaços pequenos e crie layouts inteligentes que combinem beleza e funcionalidade em qualquer projeto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers">
+        <div class="container">
+            <h2 class="section-title text-center animate">Nossos Especialistas</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 2rem;">Aprenda com os melhores profissionais do mercado de design de interiores</p>
+
+            <div class="speakers-grid">
+                <div class="speaker-card animate">
+                    <div class="speaker-img" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80');"></div>
+                    <div class="speaker-info">
+                        <h3>Mariana Silva</h3>
+                        <p class="specialty">Design Residencial</p>
+                        <p>10 anos transformando casas em lares aconchegantes e funcionais.</p>
+                        <div class="speaker-social">
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speaker-card animate">
+                    <div class="speaker-img" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                    <div class="speaker-info">
+                        <h3>Ricardo Almeida</h3>
+                        <p class="specialty">Design Comercial</p>
+                        <p>Especialista em criar espaços comerciais que convertem visitantes em clientes.</p>
+                        <div class="speaker-social">
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speaker-card animate">
+                    <div class="speaker-img" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                    <div class="speaker-info">
+                        <h3>Fernanda Costa</h3>
+                        <p class="specialty">Design Sustentável</p>
+                        <p>Pioneira em projetos ecológicos que unem beleza e responsabilidade ambiental.</p>
+                        <div class="speaker-social">
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                            <a href="#"><i class="bi bi-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location">
+        <div class="container location-container">
+            <div class="location-info animate">
+                <h2 class="section-title">Local de Destaque</h2>
+                <p>O evento será realizado no prestigiado Centro de Design de São Paulo, um espaço moderno e inspirador, equipado com os melhores recursos para proporcionar uma experiência imersiva em design de interiores.</p>
+                <p>Teremos ambientes reais decorados por profissionais renomados, onde você poderá ver e sentir na prática as técnicas aprendidas.</p>
+
+                <div class="address">
+                    <div class="address-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <div class="address-text">
+                        <p><strong>Centro de Design de São Paulo</strong></p>
+                        <p>Av. Paulista, 1000 - Bela Vista</p>
+                        <p>Abertura: 14h | Estacionamento no local</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section id="details">
+        <div class="container">
+            <h2 class="section-title text-center animate">Detalhes do Evento</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 3rem;">Descubra tudo o que o InDecor preparou para esta experiência transformadora</p>
+
+            <div class="detail-card animate">
+                <div class="detail-img">
+                    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80" alt="Ambientes decorados">
+                </div>
+                <div class="detail-content">
+                    <h3>Conheça os ambientes que você vai aprender a decorar</h3>
+                    <p>Explore diversos estilos e técnicas em ambientes reais, desde apartamentos compactos até espaços comerciais sofisticados. Nossos designers especializados mostrarão como transformar qualquer espaço, independente do tamanho ou orçamento.</p>
+                    <ul>
+                        <li>Salas de estar e TV</li>
+                        <li>Cozinhas funcionais</li>
+                        <li>Banheiros spa</li>
+                        <li>Escritórios home office</li>
+                        <li>Áreas externas e varandas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detail-card animate">
+                <div class="detail-content">
+                    <h3>Detalhes que fazem a diferença</h3>
+                    <p>Descubra os segredos por trás de projetos de design de sucesso e como pequenos detalhes podem transformar completamente um ambiente.</p>
+                    <ul>
+                        <li>Iluminação estratégica</li>
+                        <li>Uso inteligente de espelhos</li>
+                        <li>Texturas e materiais</li>
+                        <li>Elementos naturais</li>
+                        <li>Técnicas de organização</li>
+                        <li>Acabamentos premium</li>
+                    </ul>
+                </div>
+                <div class="detail-img">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80" alt="Detalhes de decoração">
+                </div>
+            </div>
+
+            <div class="detail-card animate">
+                <div class="detail-img">
+                    <img src="https://images.unsplash.com/photo-1583845112203-4540a7f31152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1400&q=80" alt="Objetos decorativos">
+                </div>
+                <div class="detail-content">
+                    <h3>Objetos que transformam</h3>
+                    <p>Aprenda a selecionar e posicionar os objetos certos para criar ambientes com personalidade e estilo único.</p>
+                    <ul>
+                        <li>Seleção de móveis</li>
+                        <li>Peças de arte e quadros</li>
+                        <li>Plantas e arranjos</li>
+                        <li>Cortinas e persianas</li>
+                        <li>Tapetes e almofadas</li>
+                        <li>Objetos de decoração</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule">
+        <div class="container">
+            <h2 class="section-title text-center animate">Programação</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 2rem;">Confira a agenda completa do evento InDecor</p>
+
+            <div class="schedule-container animate">
+                <div class="schedule-tabs">
+                    <div class="schedule-tab active" data-day="day1">Dia 1</div>
+                    <div class="schedule-tab" data-day="day2">Dia 2</div>
+                    <div class="schedule-tab" data-day="day3">Dia 3</div>
+                </div>
+
+                <div class="schedule-content active" id="day1">
+                    <div class="schedule-item">
+                        <div class="schedule-time">14:00 - 14:30</div>
+                        <div class="schedule-details">
+                            <h4>Credenciamento e Welcome Coffee</h4>
+                            <p>Recepção dos participantes com coffee break de boas-vindas</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">14:30 - 15:30</div>
+                        <div class="schedule-details">
+                            <h4>Abertura Oficial</h4>
+                            <p>Palestra magna: "O futuro do design de interiores" com Mariana Silva</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">15:30 - 17:00</div>
+                        <div class="schedule-details">
+                            <h4>Workshop: Fundamentos do Design</h4>
+                            <p>Aprenda os princípios básicos para criar ambientes harmoniosos</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">17:00 - 18:30</div>
+                        <div class="schedule-details">
+                            <h4>Tour pelos Ambientes</h4>
+                            <p>Visita guiada pelos espaços decorados com explicações técnicas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-content" id="day2">
+                    <div class="schedule-item">
+                        <div class="schedule-time">09:00 - 10:30</div>
+                        <div class="schedule-details">
+                            <h4>Psicologia das Cores</h4>
+                            <p>Como as cores influenciam o humor e a percepção dos espaços</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">10:30 - 12:00</div>
+                        <div class="schedule-details">
+                            <h4>Design para Pequenos Espaços</h4>
+                            <p>Técnicas para maximizar ambientes compactos sem perder estilo</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">14:00 - 15:30</div>
+                        <div class="schedule-details">
+                            <h4>Iluminação e Atmosfera</h4>
+                            <p>Criando ambientes perfeitos com o uso estratégico da luz</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">15:30 - 17:30</div>
+                        <div class="schedule-details">
+                            <h4>Workshop Prático</h4>
+                            <p>Mão na massa: recrie um ambiente com orientação dos especialistas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-content" id="day3">
+                    <div class="schedule-item">
+                        <div class="schedule-time">09:00 - 10:30</div>
+                        <div class="schedule-details">
+                            <h4>Design Sustentável</h4>
+                            <p>Como criar ambientes bonitos e ecologicamente corretos</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">10:30 - 12:00</div>
+                        <div class="schedule-details">
+                            <h4>Tendências 2023/2024</h4>
+                            <p>O que está em alta no mundo do design de interiores</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">14:00 - 16:00</div>
+                        <div class="schedule-details">
+                            <h4>Projeto Final e Apresentações</h4>
+                            <p>Os participantes apresentam seus projetos desenvolvidos durante o evento</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">16:00 - 17:30</div>
+                        <div class="schedule-details">
+                            <h4>Encerramento e Networking</h4>
+                            <p>Coffee de confraternização e entrega de certificados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title text-center animate">Investimento</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 2rem;">Escolha o plano que melhor se adapta às suas necessidades</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card animate">
+                    <h3>Básico</h3>
+                    <div class="price">R$ 497<span>/à vista</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso ao evento por 1 dia</li>
+                        <li>Material didático digital</li>
+                        <li>Certificado de participação</li>
+                        <li>Coffee break</li>
+                        <li class="text-muted">Acesso às gravações</li>
+                        <li class="text-muted">Kit participante</li>
+                    </ul>
+                    <button class="btn btn-outline">Escolher Plano</button>
+                </div>
+
+                <div class="pricing-card popular animate">
+                    <div class="popular-badge">Popular</div>
+                    <h3>Completo</h3>
+                    <div class="price">R$ 897<span>/à vista</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso ao evento por 3 dias</li>
+                        <li>Material didático completo</li>
+                        <li>Certificado de participação</li>
+                        <li>Coffee break premium</li>
+                        <li>Acesso às gravações por 6 meses</li>
+                        <li>Kit participante exclusivo</li>
+                    </ul>
+                    <button class="btn">Escolher Plano</button>
+                </div>
+
+                <div class="pricing-card animate">
+                    <h3>VIP</h3>
+                    <div class="price">R$ 1.297<span>/à vista</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso ao evento por 3 dias</li>
+                        <li>Material didático completo + bônus</li>
+                        <li>Certificado de participação</li>
+                        <li>Almoço e coffee break premium</li>
+                        <li>Acesso vitalício às gravações</li>
+                        <li>Kit VIP + mentoria individual</li>
+                    </ul>
+                    <button class="btn btn-outline">Escolher Plano</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center animate">O que dizem nossos alunos</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 2rem;">Veja depoimentos de quem já participou de nossos eventos</p>
+
+            <div class="testimonials-slider animate">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        Participar do InDecor mudou completamente minha abordagem ao design de interiores. As técnicas que aprendi me ajudaram a triplicar meus projetos no último ano!
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                        <div class="author-info">
+                            <h4>Camila Fernandes</h4>
+                            <p>Designer de Interiores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title text-center animate">Perguntas Frequentes</h2>
+            <p class="text-center animate" style="max-width: 700px; margin: 0 auto 2rem;">Tire suas dúvidas sobre o evento InDecor</p>
+
+            <div class="faq-container animate">
+                <div class="faq-item">
+                    <div class="faq-question">Quem pode participar do evento?</div>
+                    <div class="faq-answer">
+                        <p>O InDecor é aberto a todos interessados em design de interiores, desde iniciantes até profissionais experientes que desejam atualizar seus conhecimentos. Não é necessário ter experiência prévia na área.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">O evento será presencial ou online?</div>
+                    <div class="faq-answer">
+                        <p>O InDecor é um evento presencial que acontecerá no Centro de Design de São Paulo. No entanto, os participantes dos planos Completo e VIP terão acesso às gravações das palestras após o evento.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Há descontos para grupos?</div>
+                    <div class="faq-answer">
+                        <p>Sim, oferecemos descontos especiais para grupos a partir de 3 pessoas. Entre em contato pelo email grupos@indecor.com.br para mais informações sobre condições especiais para grupos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Qual a política de reembolso?</div>
+                    <div class="faq-answer">
+                        <p>Aceitamos cancelamentos com reembolso integral até 7 dias antes do evento. Após este período, o reembolso será de 50% do valor pago. Em caso de cancelamento pelo organizador, o reembolso será integral.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Haverá certificado de participação?</div>
+                    <div class="faq-answer">
+                        <p>Sim, todos os participantes receberão certificado digital de participação com carga horária de 16 horas, válido para atividades complementares em cursos superiores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta">
+        <div class="container animate">
+            <h2 class="section-title">Pronto para transformar seus espaços?</h2>
+            <p>Garanta já sua vaga no maior evento de design de interiores do país. Vagas limitadas!</p>
+            <button class="btn" style="margin-top: 1.5rem;">Garantir minha vaga</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">In<span>Decor</span></div>
+                    <p>A InDecor é líder em educação e treinamento para designers de interiores, com eventos que transformam a maneira como as pessoas criam e vivem em seus espaços.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-pinterest"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#benefits">Benefícios</a></li>
+                        <li><a href="#speakers">Palestrantes</a></li>
+                        <li><a href="#schedule">Programação</a></li>
+                        <li><a href="#pricing">Investimento</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contato</h3>
+                    <p><i class="bi bi-envelope"></i> oi@indecor.com.br</p>
+                    <p><i class="bi bi-telephone"></i> (11) 99990-9999</p>
+                    <p><i class="bi bi-geo-alt"></i> Av. Paulista, 1000 - São Paulo/SP</p>
+                    <p><i class="bi bi-clock"></i> Seg-Sex: 9h às 18h</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2023 InDecor. Todos os direitos reservados. | Desenvolvido com ❤️ por sua equipe de design
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animação ao rolar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Smooth scroll para links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.nav-container');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Schedule tabs
+            const scheduleTabs = document.querySelectorAll('.schedule-tab');
+            scheduleTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.schedule-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.schedule-content').forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const day = this.getAttribute('data-day');
+                    document.getElementById(day).classList.add('active');
+                });
+            });
+
+            // FAQ accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active class on question
+                    this.classList.toggle('active');
+
+                    // Get the answer element
+                    const answer = this.nextElementSibling;
+
+                    // Toggle answer visibility
+                    if (this.classList.contains('active')) {
+                        answer.classList.add('active');
+                    } else {
+                        answer.classList.remove('active');
+                    }
+
+                    // Close other answers
+                    faqQuestions.forEach(q => {
+                        if (q !== this && q.classList.contains('active')) {
+                            q.classList.remove('active');
+                            q.nextElementSibling.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 992) {
+                        navLinks.style.display = 'none';
+                    }
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    navLinks.style.display = 'flex';
+                } else {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
 </html>
